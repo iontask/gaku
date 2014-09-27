@@ -4,11 +4,11 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/packagetask'
 require 'rubygems/package_task'
-require 'gaku/testing/common_rake'
+require 'campusys/testing/common_rake'
 
 Bundler::GemHelper.install_tasks
 
-spec = eval(File.read('gaku_admin.gemspec'))
+spec = eval(File.read('campusys_admin.gemspec'))
 Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
 end
@@ -17,15 +17,15 @@ desc 'Release to gemcutter'
 task :release do
   version = File.read(
     File.expand_path('../../VERSION', __FILE__)).strip
-  cmd = "cd pkg && gem push gaku_admin-#{version}.gem"
+  cmd = "cd pkg && gem push campusys_admin-#{version}.gem"
   puts cmd
   system cmd
 end
 
 task default: :spec
 
-desc 'Generates a dummy app for testing'
+desc 'Genere une application de testing'
 task :test_app do
-  ENV['LIB_NAME'] = 'gaku/admin'
+  ENV['LIB_NAME'] = 'campusys/admin'
   Rake::Task['common:test_app'].invoke
 end
