@@ -1,22 +1,22 @@
-module Gaku
-  module Core
+module Campusys
+  module Campusys-admin
     class Engine < ::Rails::Engine
-      isolate_namespace Gaku
-      engine_name 'gaku'
+      isolate_namespace Campusys
+      engine_name 'campusys'
 
       config.autoload_paths += %W( #{config.root}/lib )
 
-      initializer 'gaku.paperclip' do
+      initializer 'campusys.paperclip' do
         Paperclip.interpolates(:placeholder) do |_attachment, style|
           ActionController::Base.helpers.asset_path("missing_#{style}.png")
         end
       end
 
-      initializer 'gaku.ruby_template_handler' do
+      initializer 'campusys.ruby_template_handler' do
         ActionView::Template.register_template_handler(:rb, :source.to_proc)
       end
 
-      initializer 'gaku.mime_types' do
+      initializer 'campusys.mime_types' do
         Mime::Type.register 'application/xls', :xls
       end
 
